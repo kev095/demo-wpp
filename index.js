@@ -65,10 +65,10 @@ app.post("/webhook", (req, res) => {
         headers: { "Content-Type": "application/json" },
       });
     }
-    res.sendStatus(200);
+    //res.sendStatus(200);
   } else {
     // Return a '404 Not Found' if event is not from a WhatsApp API
-    res.sendStatus(404);
+    //res.sendStatus(404);
   }
 
 
