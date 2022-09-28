@@ -37,6 +37,7 @@ app.post("/webhook", (req, res) => {
 
 
   // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
+  /*
   if (req.body.object) {
     if (
       req.body.entry &&
@@ -71,7 +72,7 @@ app.post("/webhook", (req, res) => {
     //res.sendStatus(404);
   }
 
-
+*/
 
 
 });
