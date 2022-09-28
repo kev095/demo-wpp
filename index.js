@@ -37,7 +37,7 @@ async function main() {
     },
   }); // Send the email
   let info = await transporter.sendMail({
-    from: '"James Swanson" <foo@example.com>',
+    from: '"Kevin Ramos" <kevin@1bconnect.com>',
     to: "kevramos95@gmail.com", // Test email address
     subject: "I love SMTP!",
     text: "Here's a text version of the email.",
