@@ -21,7 +21,7 @@ app.post("/webhook", (req, res) => {
 
   // Check the Incoming webhook message
 
-  if(req.body.entry[0].changes[0].value.messages[0].text.body){
+  if(req.body.entry[0].changes[0].value.messages[0].text.body != undefined){
     console.log(JSON.stringify(req.body.entry[0].changes[0].value.messages[0].text.body))
   }
   
