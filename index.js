@@ -20,7 +20,7 @@ app.post("/webhook", (req, res) => {
   let body = req.body;
 
   // Check the Incoming webhook message
-  console.log("message kev:",JSON.stringify(req.body, null, 2));
+  console.log("message kev:",JSON.stringify(req.body.entry[0].changes[0].value.messages, null, 2));
 
 
 
@@ -40,7 +40,7 @@ app.post("/webhook", (req, res) => {
       req.body.entry[0].changes[0] &&
       req.body.entry[0].changes[0].value.messages &&
       req.body.entry[0].changes[0].value.messages[0]
-    ) {
+    ) { 
       let phone_number_id =
         req.body.entry[0].changes[0].value.metadata.phone_number_id;
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
