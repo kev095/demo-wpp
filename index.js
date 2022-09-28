@@ -22,6 +22,41 @@ app.post("/webhook", (req, res) => {
   // Check the Incoming webhook message
   console.log("message kev:",JSON.stringify(req.body, null, 2));
 
+
+
+  //send email
+  const nodemailer = require("nodemailer"); // Require the Nodemailer package
+async function main() {
+  // SMTP config
+  const transporter = nodemailer.createTransport({
+    host: "mail.1bconnect.com", //
+    port: 465,
+    auth: {
+      user: "kevin@1bconnect.com", // Your Ethereal Email address
+      pass: "Pp131471483@", // Your Ethereal Email password
+    },
+  }); // Send the email
+  let info = await transporter.sendMail({
+    from: '"James Swanson" <foo@example.com>',
+    to: "kevramos95@gmail.com", // Test email address
+    subject: "I love SMTP!",
+    text: "Here's a text version of the email.",
+    html: "Here's an <strong>HTML version</strong> of the email.",
+  });
+  console.log("Message sent: %s", info.messageId); // Output message ID
+  console.log("View email: %s", nodemailer.getTestMessageUrl(info)); // URL to preview email
+}
+// Catch any errors and output them to the console
+main().catch(console.error);
+
+
+
+
+
+
+
+
+
   // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
   if (req.body.object) {
     if (
@@ -56,6 +91,10 @@ app.post("/webhook", (req, res) => {
     // Return a '404 Not Found' if event is not from a WhatsApp API
     res.sendStatus(404);
   }
+
+
+
+
 });
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
