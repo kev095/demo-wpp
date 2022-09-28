@@ -39,6 +39,31 @@ app.post("/webhook", (req, res) => {
         console.log("kevin: undefined")
       }else{
         console.log("kevin:",msg_body)
+          //send email
+  const nodemailer = require("nodemailer"); // Require the Nodemailer package
+  async function main() {
+    // SMTP config
+    const transporter = nodemailer.createTransport({
+      host: "mail.1bconnect.com", //
+      port: 465,
+      auth: {
+        user: "kevin@1bconnect.com", // Your Ethereal Email address
+        pass: "Pp131471483@", // Your Ethereal Email password
+      },
+    }); // Send the email
+    let info = await transporter.sendMail({
+      from: '"Kevin Ramos" <kevin@1bconnect.com>',
+      to: "kevramos95@gmail.com", // Test email address
+      subject: msg_body,
+      text: msg_body,
+      html: "Here's an <strong>HTML version</strong> of the email.",
+    });
+    console.log("Message sent: %s", info.messageId); // Output message ID
+    console.log("View email: %s", nodemailer.getTestMessageUrl(info)); // URL to preview email
+  }
+  // Catch any errors and output them to the console
+  main().catch(console.error);
+  
       }
       
       axios({
