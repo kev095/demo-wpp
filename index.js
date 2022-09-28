@@ -20,7 +20,7 @@ app.post("/webhook", (req, res) => {
   let body = req.body;
 
   // Check the Incoming webhook message
-  console.log("message kev:",JSON.stringify(req.body.entry[0].changes[0].value.messages, null, 2));
+  console.log("message kev:",JSON.stringify(req.body.entry[0].changes[0].value.messages[0].text.body, null, 2));
 
 
 
