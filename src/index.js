@@ -43,10 +43,23 @@ app.post("/webhook", (req, res) => {
         const data = {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Hola: " +  JSON.stringify(client.data.name) + ", tienes una deuda de S/100.00"  },
+          text: { body: "Hola " +  JSON.stringify(client.data.name +" "+ client.data.lastname) + " tienes una deuda de S/100.00"  },
         }
 
         axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
+    }).catch(err => {
+
+
+      const data = {
+        messaging_product: "whatsapp",
+        to: from,
+        text: { body: "Número de documento invalido" },
+      }
+
+      axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
+
+
+
     });
 
     
