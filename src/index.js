@@ -36,14 +36,14 @@ app.post("/webhook", (req, res) => {
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
   
 
-      axios.get('https://next-contabilidad-wpp.herokuapp.com/api/wpp/'+ msg_body).then(client => {
+      axios.get('https://next-contabilidad-wpp.herokuapp.com/api/wpp/'+ msg_body).then(result => {
 
-        console.log("asdasddddddddddddddddddddddddddddddddd",client.data);
+        console.log("asdasddddddddddddddddddddddddddddddddd",result.data);
         
         const data = {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Hola " +  JSON.stringify(client.data.name +" "+ client.data.lastname) + " tienes una deuda de S/100.00"  },
+          text: { body: "Hola " +  result.data.client.name +" "+ result.data.client.lastname + " tienes una deuda de S/" + result.data.amount + ".00"  },
         }
 
         axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
