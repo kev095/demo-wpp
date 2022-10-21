@@ -40,17 +40,6 @@ app.post("/webhook", (req, res) => {
 
 
  
-       // create a promise for the axios request
-       const promise = axios.get({
-        method: 'get',
-        url: 'https://next-contabilidad-wpp.herokuapp.com/api/clients/6351f616ced0cb94193c6950',
-  
-    })
-
-       // using .then, create a new promise which extracts the data
-       const dataPromise = promise.all( (response) => {
-
-
         axios({
           method: 'POST',
           url: "https://graph.facebook.com/v12.0/" +phone_number_id +"/messages?access_token=" +token,
@@ -62,7 +51,7 @@ app.post("/webhook", (req, res) => {
           headers: { "Content-Type": "application/json" },
       })
 
-       })
+    
     
 
     }
