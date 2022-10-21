@@ -56,44 +56,29 @@ app.post("/webhook", (req, res) => {
               type: "list",
               header: {
                 type: "text",
-                text: "HEADER_TEXT"
+                text: "Hola soy Lito, tu asistente virtual."
               },
               body: {
-                text: "BODY_TEXT"
+                text: "Han configurado mis circuitos para poder ayudarte en los siguientes temas."
               },
               footer: {
-                text: "FOOTER_TEXT"
+                text: "Elige una de las siguientes opciones:"
               },
               action: {
-                button: "BUTTON_TEXT",
+                button: "OPCIONES",
                 sections: [
                   {
-                    title: "SECTION_1_TITLE",
+                    title: "Te ayudamos:",
                     rows: [
                       {
                         id: "SECTION_1_ROW_1_ID",
-                        title: "SECTION_1_ROW_1_TITLE",
-                        description: "SECTION_1_ROW_1_DESCRIPTION"
+                        title: "Gestión Contable",
+                        description: ""
                       },
                       {
                         id: "SECTION_1_ROW_2_ID",
-                        title: "SECTION_1_ROW_2_TITLE",
-                        description: "SECTION_1_ROW_2_DESCRIPTION"
-                      }
-                    ]
-                  },
-                  {
-                    title: "SECTION_2_TITLE",
-                    rows: [
-                      {
-                        id: "SECTION_2_ROW_1_ID",
-                        title: "SECTION_2_ROW_1_TITLE",
-                        description: "SECTION_2_ROW_1_DESCRIPTION"
-                      },
-                      {
-                        id: "SECTION_2_ROW_2_ID",
-                        title: "SECTION_2_ROW_2_TITLE",
-                        description: "SECTION_2_ROW_2_DESCRIPTION"
+                        title: "Facturación Electronica",
+                        description: ""
                       }
                     ]
                   }
