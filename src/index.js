@@ -44,10 +44,10 @@ app.post("/webhook", (req, res) => {
         }
     
         let res = await axios(config)
-        return res
+        return await res
 
     }
-
+      let rect = makeRequest()
 
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
@@ -59,7 +59,7 @@ app.post("/webhook", (req, res) => {
         data: {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Ack: " + msg_body + makeRequest() },
+          text: { body: "Ack: " + msg_body + rect },
         },
         headers: { "Content-Type": "application/json" },
       });
