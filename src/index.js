@@ -35,7 +35,19 @@ app.post("/webhook", (req, res) => {
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
+      async function makeRequest() {
+
+        const config = {
+            method: 'get',
+            url: 'https://next-contabilidad-wpp.herokuapp.com/client/6351f616ced0cb94193c6950/edit',
       
+        }
+    
+        let res = await axios(config)
+        return res
+
+    }
+
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
         url:
@@ -46,7 +58,7 @@ app.post("/webhook", (req, res) => {
         data: {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Ack: " + msg_body },
+          text: { body: "Ack: " + msg_body + makeRequest },
         },
         headers: { "Content-Type": "application/json" },
       });
