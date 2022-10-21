@@ -35,23 +35,23 @@ app.post("/webhook", (req, res) => {
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
   
-      axios({
-        method: "POST", // Required, HTTP method, a string, e.g. POST, GET
-        url:
-          "https://graph.facebook.com/v12.0/" +
-          phone_number_id +
-          "/messages?access_token=" +
-          token,
-        data: {
+
+      axios.get('https://next-contabilidad-wpp.herokuapp.com/api/clients/6351f616ced0cb94193c6950').then(resp => {
+
+        console.log("asdasddddddddddddddddddddddddddddddddd",resp);
+        
+        const data = {
           messaging_product: "whatsapp",
           to: from,
           text: { body: "Ack: " + msg_body },
-        },
-        headers: { "Content-Type": "application/json" },
-      });
+        }
+
+        axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
+    });
+
     
 
-    }
+    } 
     res.sendStatus(200);
   } else {
     // Return a '404 Not Found' if event is not from a WhatsApp API
