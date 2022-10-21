@@ -100,7 +100,7 @@ app.post("/webhook", (req, res) => {
 
 
 
-
+    /*
     if(msg_body === 'Facturación Electronica'){
 
     
@@ -134,12 +134,12 @@ app.post("/webhook", (req, res) => {
     });
     }
     
+*/
 
 
 
 
 
-    
 
     } 
     res.sendStatus(200);
