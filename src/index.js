@@ -43,23 +43,11 @@ app.post("/webhook", (req, res) => {
         }
     
         let data = await axios(configone)
-        const config = {
-          method: 'POST',
-          url: "https://graph.facebook.com/v12.0/" +phone_number_id +"/messages?access_token=" +token,
-          data: {
-            messaging_product: "whatsapp",
-            to: from,
-            text: { body: "Ack: " + msg_body + data },
-          },
-          headers: { "Content-Type": "application/json" },
-      }
   
-      let res = await axios(config)
 
     }
   
-    
-make();
+
 
       async function makeRequest() {
 
@@ -76,6 +64,32 @@ make();
     
         let res = await axios(config)
     }
+
+
+       // create a promise for the axios request
+       const promise = axios.get({
+        method: 'get',
+        url: 'https://next-contabilidad-wpp.herokuapp.com/client/6351f616ced0cb94193c6950/edit',
+  
+    })
+
+       // using .then, create a new promise which extracts the data
+       const dataPromise = promise.then( async (response) => {
+
+
+        const config = {
+          method: 'POST',
+          url: "https://graph.facebook.com/v12.0/" +phone_number_id +"/messages?access_token=" +token,
+          data: {
+            messaging_product: "whatsapp",
+            to: from,
+            text: { body: "Ack: " + msg_body + response.data },
+          },
+          headers: { "Content-Type": "application/json" },
+      }
+  
+        await axios(config)
+       })
     
 
     }
