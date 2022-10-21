@@ -19,7 +19,7 @@ app.post("/webhook", (req, res) => {
   // Parse the request body from the POST
   let body = req.body;
 
- // console.log(JSON.stringify(req.body, null, 2));
+  console.log(JSON.stringify(req.body, null, 2));
 
   // info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages
   if (req.body.object) {
@@ -36,6 +36,76 @@ app.post("/webhook", (req, res) => {
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
   
 
+
+      const dataInitial ={
+          
+        messaging_product: "whatsapp",
+        recipient_type: "individual",
+        to: from,
+        type: "interactive",
+        interactive: {
+          type: "list",
+          header: {
+            type: "text",
+            text: "Hola soy Lito, tu asistente virtual."
+          },
+          body: {
+            text: "Han configurado mis circuitos para poder ayudarte en los siguientes temas."
+          },
+          footer: {
+            text: "Elige una de las siguientes opciones:"
+          },
+          action: {
+            button: "OPCIONES",
+            sections: [
+              {
+                title: "Te ayudamos:",
+                rows: [
+                  {
+                    id: "SECTION_1_ROW_1_ID",
+                    title: "Gestión Contable",
+                    description: ""
+                  },
+                  {
+                    id: "SECTION_1_ROW_2_ID",
+                    title: "Facturación Electronica",
+                    description: ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      
+    }
+
+
+
+
+    axios({
+      method: "POST", // Required, HTTP method, a string, e.g. POST, GET
+      url:
+        "https://graph.facebook.com/v12.0/" +
+        phone_number_id +
+        "/messages?access_token=" +
+        token,
+      data: {
+        messaging_product: "whatsapp",
+        to: from,
+        text: { body:  dataInitial },
+      },
+      headers: { "Content-Type": "application/json" },
+    });
+
+
+
+
+
+    if(msg_body === 'Facturación Electronica'){
+
+    
+
+
       axios.get('https://next-contabilidad-wpp.herokuapp.com/api/wpp/'+ msg_body).then(result => {
 
         console.log("asdasddddddddddddddddddddddddddddddddd",result.data);
@@ -46,49 +116,8 @@ app.post("/webhook", (req, res) => {
           text: { body: "Hola " +  result.data.name +" "+ result.data.lastname + " tienes una deuda de S/100.00" },
         }
 
-        const data2 ={
-          
-            messaging_product: "whatsapp",
-            recipient_type: "individual",
-            to: from,
-            type: "interactive",
-            interactive: {
-              type: "list",
-              header: {
-                type: "text",
-                text: "Hola soy Lito, tu asistente virtual."
-              },
-              body: {
-                text: "Han configurado mis circuitos para poder ayudarte en los siguientes temas."
-              },
-              footer: {
-                text: "Elige una de las siguientes opciones:"
-              },
-              action: {
-                button: "OPCIONES",
-                sections: [
-                  {
-                    title: "Te ayudamos:",
-                    rows: [
-                      {
-                        id: "SECTION_1_ROW_1_ID",
-                        title: "Gestión Contable",
-                        description: ""
-                      },
-                      {
-                        id: "SECTION_1_ROW_2_ID",
-                        title: "Facturación Electronica",
-                        description: ""
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          
-        }
-
-        axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data2,{headers: { "Content-Type": "application/json" }})
+        
+        axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
     }).catch(err => {
 
 
@@ -103,6 +132,12 @@ app.post("/webhook", (req, res) => {
 
 
     });
+    }
+    
+
+
+
+
 
     
 
