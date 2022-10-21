@@ -35,41 +35,15 @@ app.post("/webhook", (req, res) => {
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      async function make() {
-        const configone = {
-            method: 'get',
-            url: 'https://next-contabilidad-wpp.herokuapp.com/client/6351f616ced0cb94193c6950/edit',
-      
-        }
-    
-        let data = await axios(configone)
-  
 
-    }
   
 
 
-      async function makeRequest() {
-
-        const config = {
-            method: 'POST',
-            url: "https://graph.facebook.com/v12.0/" +phone_number_id +"/messages?access_token=" +token,
-            data: {
-              messaging_product: "whatsapp",
-              to: from,
-              text: { body: "Ack: " + msg_body + await make() },
-            },
-            headers: { "Content-Type": "application/json" },
-        }
-    
-        let res = await axios(config)
-    }
-
-
+ 
        // create a promise for the axios request
        const promise = axios.get({
         method: 'get',
-        url: 'https://next-contabilidad-wpp.herokuapp.com/client/6351f616ced0cb94193c6950/edit',
+        url: 'https://next-contabilidad-wpp.herokuapp.com/api/clients/6351f616ced0cb94193c6950',
   
     })
 
