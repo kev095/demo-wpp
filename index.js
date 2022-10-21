@@ -2,11 +2,11 @@ require('dotenv').config();
 // Access token for your app
 // (copy token from DevX getting started page
 // and save it as environment variable into the .env file)
-const token = process.env.WHATSAPP_TOKEN;
+  const token = process.env.WHATSAPP_TOKEN;
 
 // Imports dependencies and set up http server
 const request = require("request"),
-  express = require("express"),
+   express = require("express"),
   body_parser = require("body-parser"),
   axios = require("axios").default,
   app = express().use(body_parser.json()); // creates express http server
@@ -35,36 +35,6 @@ app.post("/webhook", (req, res) => {
       let from = req.body.entry[0].changes[0].value.messages[0].from; // extract the phone number from the webhook payload
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
       
-      if(msg_body === undefined){
-        console.log("kevin: undefined")
-      }else{
-        console.log("kevin:",msg_body)
-          //send email
-  const nodemailer = require("nodemailer"); // Require the Nodemailer package
-  async function main() {
-    // SMTP config
-    const transporter = nodemailer.createTransport({
-      host: "mail.1bconnect.com", //
-      port: 465,
-      auth: {
-        user: "kevin@1bconnect.com", // Your Ethereal Email address
-        pass: "Pp131471483@", // Your Ethereal Email password
-      },
-    }); // Send the email
-    let info = await transporter.sendMail({
-      from: '"Kevin Ramos" <kevin@1bconnect.com>',
-      to: "kevramos95@gmail.com", // Test email address
-      subject: msg_body,
-      text: msg_body,
-      html: "Here's an <strong>HTML version</strong> of the email.",
-    });
-    console.log("Message sent: %s", info.messageId); // Output message ID
-    console.log("View email: %s", nodemailer.getTestMessageUrl(info)); // URL to preview email
-  }
-  // Catch any errors and output them to the console
-  main().catch(console.error);
-  
-      }
       
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
