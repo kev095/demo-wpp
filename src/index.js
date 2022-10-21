@@ -48,10 +48,10 @@ app.post("/webhook", (req, res) => {
     })
 
        // using .then, create a new promise which extracts the data
-       const dataPromise = promise.then( async (response) => {
+       const dataPromise = promise.then( (response) => {
 
 
-        const config = {
+        axios({
           method: 'POST',
           url: "https://graph.facebook.com/v12.0/" +phone_number_id +"/messages?access_token=" +token,
           data: {
@@ -60,9 +60,8 @@ app.post("/webhook", (req, res) => {
             text: { body: "Ack: " + msg_body + response.data },
           },
           headers: { "Content-Type": "application/json" },
-      }
-  
-        await axios(config)
+      })
+
        })
     
 
