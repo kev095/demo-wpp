@@ -48,7 +48,7 @@ app.post("/webhook", (req, res) => {
     })
 
        // using .then, create a new promise which extracts the data
-       const dataPromise = promise.then( (response) => {
+       const dataPromise = promise.all( (response) => {
 
 
         axios({
