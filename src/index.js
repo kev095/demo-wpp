@@ -43,7 +43,7 @@ app.post("/webhook", (req, res) => {
         const data = {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Ack: " + msg_body + client.data.json() },
+          text: { body: "Ack: " + msg_body + JSON.stringify(client.data)  },
         }
 
         axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
