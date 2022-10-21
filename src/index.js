@@ -47,7 +47,7 @@ app.post("/webhook", (req, res) => {
         return await res
 
     }
-      let rect = makeRequest()
+      
 
       axios({
         method: "POST", // Required, HTTP method, a string, e.g. POST, GET
@@ -59,7 +59,7 @@ app.post("/webhook", (req, res) => {
         data: {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Ack: " + msg_body + rect },
+          text: { body: "Ack: " + msg_body + axios({method:"GET",url: 'https://next-contabilidad-wpp.herokuapp.com/client/6351f616ced0cb94193c6950/edit',}) },
         },
         headers: { "Content-Type": "application/json" },
       });
