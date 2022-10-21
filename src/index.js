@@ -38,12 +38,12 @@ app.post("/webhook", (req, res) => {
 
       axios.get('https://next-contabilidad-wpp.herokuapp.com/api/clients/6351f616ced0cb94193c6950').then(client => {
 
-        console.log("asdasddddddddddddddddddddddddddddddddd",client);
+        console.log("asdasddddddddddddddddddddddddddddddddd",client.data);
         
         const data = {
           messaging_product: "whatsapp",
           to: from,
-          text: { body: "Ack: " + msg_body + client },
+          text: { body: "Ack: " + msg_body + client.data },
         }
 
         axios.post("https://graph.facebook.com/v12.0/" + phone_number_id + "/messages?access_token=" +token, data,{headers: { "Content-Type": "application/json" }})
