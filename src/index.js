@@ -36,7 +36,7 @@ app.post("/webhook", (req, res) => {
       let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body; // extract the message text from the webhook payload
   
 
-      axios.get('https://next-contabilidad-wpp.herokuapp.com/api/clients/6351f616ced0cb94193c6950').then(client => {
+      axios.get('https://next-contabilidad-wpp.herokuapp.com/api/wpp/'+ msg_body).then(client => {
 
         console.log("asdasddddddddddddddddddddddddddddddddd",client.data);
         
